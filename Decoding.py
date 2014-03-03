@@ -1,3 +1,5 @@
+
+
 """
 This method determines whether a list of square matrices of the same size can
 be decoded according to fountain code.
@@ -102,7 +104,7 @@ def test():
 	matrix1 = [[True, True], [True, True]]
 	matrix2 = [[False, False], [True, False]]
 	matrix3 = [[True, True], [False, False]]
-	# Should be True
+	# Should be False
 	fourth_test = not (is_decodable([matrix1, matrix2, matrix3]))
 	if(not third_test):
 		print("Fourt test failed.")
@@ -111,6 +113,4 @@ def test():
 	# Prints if everything is passed.
 	if(all_passed):
 		print("All tests passed.")
-
-test()
 
