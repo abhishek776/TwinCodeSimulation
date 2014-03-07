@@ -1,5 +1,3 @@
-
-
 """
 This method determines whether a list of square matrices of the same size can
 be decoded according to fountain code.
