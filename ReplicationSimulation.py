@@ -3,6 +3,12 @@ from ReplicationNode import *
 from Decoding import *
 from random import *
 
+
+"""
+Returns a simulator method for replication that works for a specific data size. The
+returned method will take in the number of simulations and how many connections each
+"user" can make. The default number of connections is twice as big as the data size.
+"""
 def replication_simulation(num_blocks):
 
 	def simulator(num_of_simulations, connection_limit=num_blocks*2):
@@ -34,11 +40,11 @@ def replication_simulation(num_blocks):
 			for item in speeds:
 				if item is None:
 					num_errors = num_errors + 1
+					print("Simulation " + str(i) + ": ERROR")
 					error = True
+					break;
 
-			if error:
-				print("Simulation " + str(i) + ": ERROR")
-			else:
+			if not error:
 				speed = min(speeds)
 				time = 1.0/speed
 				total_time = total_time + time
@@ -53,7 +59,21 @@ def replication_simulation(num_blocks):
 
 	return simulator
 
+"""
+Test with the simulation specified in our discussion
+"""
+def test():
+	simulator = replication_simulation(4)
+	simulator(100000)
 
 
-
-		
+"""
+Run simulations based on user inputs. Please follow the parameters defined in the
+print statements. I will implement the assertions and exceptions later in the weekend.
+"""
+def custom_run():
+	data_size = input("What is the size of the data (please enter a perfect square): ")
+	simulator = replication_simulation(int(data_size))
+	simulations = input("How many simulations (please enter positive integer): ")
+	connections = input("How many connections (please enter positive integer): ")
+	simulator(int(simulations),int(connections))
