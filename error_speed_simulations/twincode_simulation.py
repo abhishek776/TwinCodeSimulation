@@ -1,7 +1,21 @@
 from random import *
 from heapq import nlargest
 
-def single_twincode(num_blocks,connection_limit,num_codes):
+"""
+Runs a single simulation for Twin Code given the parameters. The user picks either
+a set of Red nodes or Blue nodes. There must be num_blocks number of Red Nodes or
+Blue Nodes to be valid.
+
+Parameters:
+	num_blocks: size of data
+	connection_limit: number of connections
+	num_codes: irrelevant to this simulation
+
+Returns:
+	speed: float of the speed
+	error: boolean of wheter it is an error.
+"""
+def single_twincode(num_blocks,connection_limit,num_codes=0):
 	speed = None
 	red_speeds = []
 	blue_speeds = []

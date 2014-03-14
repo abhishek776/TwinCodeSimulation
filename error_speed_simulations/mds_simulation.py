@@ -1,6 +1,20 @@
 from random import *
 from heapq import nlargest
 
+"""
+Runs a single simulation for MDS Code given the parameters. MDS code functionally
+has a user defined number of codes and that the user only needs to access 4 unique
+codes to access the data.
+
+Parameters:
+	num_blocks: size of data
+	connection_limit: number of connections
+	num_codes: number of codes inputted by user
+
+Returns:
+	speed: float of the speed
+	error: boolean of wheter it is an error.
+"""
 def single_mds(num_blocks,connection_limit,num_codes):
 	speed = None
 	conn_speeds = []

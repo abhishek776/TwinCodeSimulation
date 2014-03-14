@@ -1,5 +1,18 @@
 from random import *
 
+"""
+Runs a single simulation for Replication Code given the parameters. The user must see all
+packets of data to access the data.
+
+Parameters:
+	num_blocks: size of data
+	connection_limit: number of connections
+	num_codes: irrelevant to this simulation
+
+Returns:
+	speed: float of the speed
+	error: boolean of wheter it is an error.
+"""
 def single_replication(num_blocks,connection_limit,num_codes=0):
 	speed = None
 	conn_speeds = []
