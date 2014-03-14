@@ -82,8 +82,8 @@ def replication_test(num_simulations=100000, printTrigger=True):
 """
 Runs the default MDS test. Size 4, 8 Connections, 8 Codes.
 """
-def mds_test(num_simulations=100000, printTrigger=True):
-	simulator = create_simulation(4,"MDS",printTrigger)
+def mds_test(num_simulations=100000, printTrigger=True,takeInputs=False):
+	simulator = create_simulation(4,"MDS",printTrigger,takeInputs)
 	results = simulator(num_simulations)
 	print_results(num_simulations, results)
 
