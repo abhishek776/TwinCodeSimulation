@@ -13,9 +13,9 @@ def replication_simulation(num_blocks):
 
 	def simulator(num_of_simulations, connection_limit=num_blocks*2):
 
-		non_error = 0
-		total_time = 0
-		num_errors = 0
+		non_error = 0.0
+		total_time = 0.0
+		num_errors = 0.0
 		for i in range(0,num_of_simulations):
 			speed = None
 			connections = []
@@ -64,7 +64,7 @@ Test with the simulation specified in our discussion
 """
 def test():
 	simulator = replication_simulation(4)
-	simulator(100000)
+	simulator(1000000)
 
 
 """
@@ -77,3 +77,9 @@ def custom_run():
 	simulations = input("How many simulations (please enter positive integer): ")
 	connections = input("How many connections (please enter positive integer): ")
 	simulator(int(simulations),int(connections))
+
+
+"""
+Run a million simulations
+"""
+test()
