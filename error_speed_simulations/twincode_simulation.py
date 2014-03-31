@@ -1,5 +1,6 @@
 from random import *
 from heapq import nlargest
+from mds_simulation import *
 
 """
 Runs a single simulation for Twin Code given the parameters. The user picks either
@@ -9,32 +10,31 @@ Blue Nodes to be valid.
 Parameters:
 	num_blocks: size of data
 	connection_limit: number of connections
-	num_codes: irrelevant to this simulation
+	num_codes: number of codes inputted by user that either color must receive to be successful
 
 Returns:
 	speed: float of the speed
 	error: boolean of wheter it is an error.
 """
-def single_twincode(num_blocks,connection_limit,num_codes=0):
+def single_twincode(num_blocks,connection_limit,num_codes):
 	speed = None
-	red_speeds = []
-	blue_speeds = []
+	red_count = 0
+	blue_count = 0
 
 	for j in range(0,connection_limit):
-		bandwith = random() + 0.5
 		is_red = int(random()*2) == 0
 		if is_red:
-			red_speeds.append(bandwith)
+			red_count += 1
 		else:
-			blue_speeds.append(bandwith)
+			blue_count += 1
 	
 	red_speed = None
 	blue_speed = None
 
-	if(len(red_speeds) >= num_blocks):
-		red_speed = red_speeds[nlargest(num_blocks,range(len(red_speeds)),key=lambda i:red_speeds[i])[num_blocks-1]]
-	if(len(blue_speeds) >= num_blocks):
-		blue_speed = blue_speeds[nlargest(num_blocks,range(len(blue_speeds)),key=lambda i:blue_speeds[i])[num_blocks-1]] 
+	if(red_count >= num_blocks):
+		red_speed = single_mds(num_blocks, red_count, num_codes)[0]
+	if(blue_count >= num_blocks):
+		blue_speed = single_mds(num_blocks, blue_count, num_codes)[0]
 
 	error = False
 
@@ -44,7 +44,7 @@ def single_twincode(num_blocks,connection_limit,num_codes=0):
 
 	else:
 		if red_speed and blue_speed:
-			speed = min(red_speed, blue_speed)
+			speed = max(red_speed, blue_speed)
 		elif red_speed and not blue_speed:
 			speed = red_speed
 		else:

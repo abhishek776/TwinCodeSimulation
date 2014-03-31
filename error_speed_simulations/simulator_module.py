@@ -22,8 +22,8 @@ def create_simulation(num_blocks, typ, printTrigger=False, takeInputs=False):
 	single_simulation = TYPES[typ]
 	num_codes=num_blocks*2
 
-	if(single_simulation == single_mds and takeInputs):
-		inp = str(input("How many codes does your MDS have (leave blank for default value)? "))
+	if((single_simulation == single_mds or single_simulation == single_twincode) and takeInputs):
+		inp = str(input("How many codes does your trial have (leave blank for default value)? "))
 		if len(inp) > 0:
 			num_codes = int(inp)
 
@@ -176,9 +176,6 @@ def custom_run():
 	else:
 		results = create_simulation(data, typ, True, True)(num_sims, connections)
 		print_results(num_sims,results)
-
-
-
 
 
 

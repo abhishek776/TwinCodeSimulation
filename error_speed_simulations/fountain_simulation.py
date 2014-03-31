@@ -27,5 +27,5 @@ def single_fountain(num_blocks,connection_limit,num_codes=0):
 		error = True
 		return None, error
 	else:
-		speed = speeds[nlargest(num_blocks,range(len(speeds)),key=lambda i:speeds[i])[num_blocks-1]]
+		speed = nlargest(num_blocks,speeds)[num_blocks-1]
 		return speed, error

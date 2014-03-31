@@ -20,7 +20,7 @@ def single_mds(num_blocks,connection_limit,num_codes):
 	conn_speeds = []
 
 	for j in range(0,connection_limit):
-		code_num = int(random()*num_codes + 1)
+		code_num = int(random()*num_codes)
 		bandwith = random() + 0.5
 		conn_speeds.append((code_num,bandwith))
 
@@ -32,7 +32,7 @@ def single_mds(num_blocks,connection_limit,num_codes):
 		this_speed = conn_speeds[j][1]
 
 		if this_code in speeds:
-			speeds[this_code] = min(speeds[this_code], this_speed)
+			speeds[this_code] = max(speeds[this_code], this_speed)
 		else:
 			speeds[this_code] = this_speed
 
