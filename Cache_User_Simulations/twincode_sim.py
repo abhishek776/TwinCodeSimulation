@@ -67,5 +67,102 @@ Returns:
 	error: boolean of wheter it is an error.
 """
 def cache_single_twin(num_blocks,connection_limit,num_codes):
-	#  "Not Implemented"
-	return 0,True
+	speed=None
+	blue_connections=[]
+	red_connections=[]
+	which_code = (random_int(2)==0,random_int(num_codes))
+
+	for j in range(0,connection_limit):
+		is_red = (random_int(2) == 0)
+		code = random_int(num_codes)
+		bandwith = random_bandwith()
+		if is_red:
+			red_connections.append((code,bandwith))
+		else:
+			blue_connections.append((code,bandwith))
+
+
+	copy_error = True
+	copy_speed = 0
+
+	blue_speeds = {}
+	blue_error = True
+	blue_speed = None
+
+	for j in range(0,len(blue_connections)):
+		this_code = blue_connections[j][0]
+		this_speed = blue_connections[j][1]
+
+		if which_code[0] == False and which_code[1] == this_code:
+			copy_speed += this_speed
+			copy_error = False
+
+		if this_code in blue_speeds:
+			blue_speeds[this_code] = blue_speeds[this_code] + this_speed
+		else:
+			blue_speeds[this_code] = this_speed
+
+	if(num_blocks <= len(blue_speeds)):
+		blue_error = False
+		blue_speed = blue_speeds[nlargest(num_blocks,blue_speeds.keys(),key=lambda i:blue_speeds[i])[num_blocks-1]]
+
+
+
+	red_speeds = {}
+	red_error = True
+	red_speed = None
+
+	for j in range(0,len(red_connections)):
+		this_code = red_connections[j][0]
+		this_speed = red_connections[j][1]
+
+		if which_code[0] == True and which_code[1] == this_code:
+			copy_speed += this_speed
+			copy_error = False
+
+		if this_code in red_speeds:
+			red_speeds[this_code] = red_speeds[this_code] + this_speed
+		else:
+			red_speeds[this_code] = this_speed
+
+	if(num_blocks <= len(red_speeds)):
+		red_error = False
+		red_speed = red_speeds[nlargest(num_blocks,red_speeds.keys(),key=lambda i:red_speeds[i])[num_blocks-1]]
+
+
+
+	reconstruct_error = True
+	reconstruct_speed = None
+	twin_error = True
+	twin_speed = None
+
+	if which_code[0] == True:
+		if(not red_error):
+			reconstruct_error = False
+			reconstruct_speed = red_speed
+		if(not blue_error):
+			twin_error = False
+			twin_speed = blue_speed*num_blocks
+	else:
+		if(not blue_error):
+			reconstruct_error = False
+			reconstruct_speed = blue_speed
+		if(not red_error):
+			twin_error = False
+			twin_speed = red_speed*num_blocks
+
+	if reconstruct_error and twin_error and copy_error:
+		return None,True
+	elif not twin_error and not copy_error:
+		return max(twin_speed,copy_speed),False
+	elif not twin_error and not reconstruct_error:
+		return max(twin_speed,reconstruct_speed),False
+	elif not copy_error and not reconstruct_error:
+		return max(copy_speed,reconstruct_speed),False
+	elif not twin_error:
+		return twin_speed,False
+	elif not copy_error:
+		return copy_speed,False
+	else:
+		return reconstruct_speed,False
+

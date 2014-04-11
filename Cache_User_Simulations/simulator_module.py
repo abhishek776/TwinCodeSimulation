@@ -24,22 +24,14 @@ withing the give parameters. This method will deal with all the calculations, nu
 of simulations, printing messages, and taking inputs. It returns a simulator method
 based on the simulation type that was entered into the method.
 """
-def create_simulation(cache_or_user, num_blocks, typ, printTrigger=False, takeInputs=False):
+def create_simulation(cache_or_user, num_blocks, typ, printTrigger=False):
 
 	if cache_or_user is "User":
 		single_simulation = USER_TYPES[typ]
 	elif cache_or_user is "Cache":
 		single_simulation = CACHE_TYPES[typ]
 
-	num_codes=num_blocks*2
-
-	if(single_simulation in (user_single_mds,cache_single_mds,user_single_twin,cache_single_twin) and takeInputs):
-		inp = str(input("How many codes does your trial have (leave blank for default value)? "))
-		if len(inp) > 0:
-			num_codes = int(inp)
-
-
-	def simulator(num_of_simulations,connection_limit=num_blocks*2):
+	def simulator(num_of_simulations,num_codes,connection_limit=num_blocks*2):
 
 		non_error = 0.0
 		total_time = 0.0
