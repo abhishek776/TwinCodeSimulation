@@ -97,9 +97,7 @@ def cache_single_twin(num_blocks,connection_limit,num_codes):
 			copy_speed += this_speed
 			copy_error = False
 
-		if this_code in blue_speeds:
-			blue_speeds[this_code] = blue_speeds[this_code] + this_speed
-		else:
+		if this_code not in blue_speeds or blue_speeds[this_code] < this_speed:
 			blue_speeds[this_code] = this_speed
 
 	if(num_blocks <= len(blue_speeds)):
@@ -120,9 +118,7 @@ def cache_single_twin(num_blocks,connection_limit,num_codes):
 			copy_speed += this_speed
 			copy_error = False
 
-		if this_code in red_speeds:
-			red_speeds[this_code] = red_speeds[this_code] + this_speed
-		else:
+		if this_code not in red_speeds or red_speeds[this_code] < this_speed:
 			red_speeds[this_code] = this_speed
 
 	if(num_blocks <= len(red_speeds)):

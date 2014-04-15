@@ -79,9 +79,7 @@ def cache_single_mds(num_blocks,connection_limit,num_codes):
 			chosen_speed += this_speed
 			chosen_error = False
 
-		if this_code in speeds:
-			speeds[this_code] = speeds[this_code] + this_speed
-		else:
+		if this_code not in speeds or speeds[this_code] < this_speed:
 			speeds[this_code] = this_speed
 
 	if len(speeds) >= num_blocks:
