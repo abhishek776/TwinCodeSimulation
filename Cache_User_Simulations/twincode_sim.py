@@ -22,7 +22,7 @@ def user_single_twin(num_blocks,connection_limit,num_codes):
 	blue_count = 0
 
 	for j in range(0,connection_limit):
-		is_red = random_int(2) == 0
+		is_red = random_color() == 0
 		if is_red:
 			red_count += 1
 		else:
@@ -70,10 +70,10 @@ def cache_single_twin(num_blocks,connection_limit,num_codes):
 	speed=None
 	blue_connections=[]
 	red_connections=[]
-	which_code = (random_int(2)==0,random_int(num_codes))
+	which_code = (random_color()==0,random_int(num_codes))
 
 	for j in range(0,connection_limit):
-		is_red = (random_int(2) == 0)
+		is_red = (random_color() == 0)
 		code = random_int(num_codes)
 		bandwith = random_bandwith()
 		if is_red:

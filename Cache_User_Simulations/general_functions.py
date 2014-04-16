@@ -8,3 +8,11 @@ def random_bandwith():
 
 def random_int(total_num):
 	return int(random()*total_num)
+
+
+def random_color():
+	interm = int(random() * 4)
+	if interm == 0:
+		return 0
+	else:
+		return 1
