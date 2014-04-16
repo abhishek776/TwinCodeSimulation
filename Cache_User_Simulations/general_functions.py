@@ -11,8 +11,8 @@ def random_int(total_num):
 
 
 def random_color():
-	interm = int(random() * 4)
-	if interm == 0:
+	interm = int(random() * 10)
+	if interm <= 5:
 		return 0
 	else:
 		return 1
