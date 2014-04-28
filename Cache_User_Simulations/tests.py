@@ -54,6 +54,23 @@ Runs the default Twin Code test. Size 4, 8 Connections. codes -> infinity.
 def twin_test(num_blocks=4,num_codes=8,num_simulations=100000, printTrigger=True):
 	generic_test("TwinCode", num_blocks, num_codes,num_simulations, printTrigger)
 
+"""
+Runs tests for the MSR Code
+"""
+def msr_test(num_blocks, num_codes, num_conn, num_simulations=100000, printTrigger=True):
+	print # Empty Line
+	print "--------------- MSR RESULTS ---------------"
+	print # Empty Line
+	print "\t-------- USER RESULTS--------"
+	simulator = create_simulation("User",num_blocks,"MSR",printTrigger)
+	results = simulator(num_simulations,num_codes,num_conn)
+	print_results(num_simulations,results)
+	print # Empty Line
+	print "\t-------- CACHE RESULTS--------"
+	simulator = create_simulation("Cache",num_blocks,"MSR",printTrigger)
+	results = simulator(num_simulations,num_codes,num_conn)
+	print_results(num_simulations, results)	
+
 def test_variable_connection_generic(typ, num_simulations=10000, num_blocks=4, num_codes=8,printTrigger=True):
 	print # Empty Line
 	print "---------- " + typ.upper() + " RESULTS ----------"
@@ -73,6 +90,8 @@ def test_variable_connection_fountain(num_simulations=10000, num_blocks=4, num_c
 def test_variable_connection_twin(num_simulations=10000, num_blocks=4, num_codes=8,printTrigger=False):
 	test_variable_connection_generic("TwinCode", num_simulations, num_blocks, num_codes, printTrigger)
 
+def test_variable_connection_msr(num_blocks, num_codes, num_simulations=10000, printTrigger=False):
+	test_variable_connection_generic("MSR", num_simulations, num_blocks, num_codes, printTrigger)
 
 def test_variable_connection_helper(user_simulator, cache_simulator, num_blocks, num_codes,num_simulations):
 	print("\n\t-------- n CONNECTIONS-------")

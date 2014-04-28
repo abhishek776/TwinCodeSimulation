@@ -2,11 +2,13 @@ from fountain_sim import *
 from replication_sim import *
 from mds_sim import *
 from twincode_sim import *
+from msr_sim import *
 
 USER_TYPES = {"Replication":user_single_replication,
 		 "MDS":user_single_mds,
 		 "Fountain":user_single_fountain,
 		 "TwinCode":user_single_twin,
+		 "MSR":user_single_msr,
 		 "All":None
 		 }
 
@@ -14,6 +16,7 @@ CACHE_TYPES = {"Replication":cache_single_replication,
 		 "MDS":cache_single_mds,
 		 "Fountain":cache_single_fountain,
 		 "TwinCode":cache_single_twin,
+ 		 "MSR":cache_single_msr,
 		 "All":None
 		 }
 
