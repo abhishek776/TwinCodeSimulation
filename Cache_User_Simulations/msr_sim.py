@@ -19,7 +19,6 @@ Returns:
 	speed: float of the speed
 	error: boolean of wheter it is an error.
 """
-
 def user_single_msr(num_blocks,connection_limit,num_codes):
 	return user_single_mds(num_blocks, connection_limit, num_codes)
 
@@ -79,7 +78,7 @@ def cache_single_msr(num_blocks,connection_limit,num_codes):
 	if len(special_speeds) >= num_codes:
 		special_error = False
 		special_speed = special_speeds[nlargest(num_codes, special_speeds.keys(), key=lambda i:special_speeds[i])[num_blocks-1]]
-		special_speed = special_speed * (num_codes + 1)
+		special_speed = special_speed * ( (multiple-1)*num_blocks + 1)
 
 	if chosen_error and reconstruction_error and special_error:
 		return None,True
