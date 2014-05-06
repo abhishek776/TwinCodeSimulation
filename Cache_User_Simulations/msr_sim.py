@@ -19,7 +19,7 @@ Returns:
 	speed: float of the speed
 	error: boolean of wheter it is an error.
 """
-def user_single_msr(num_blocks,connection_limit,num_codes):
+def user_single_msr(num_blocks,connection_limit,num_codes,multiple=2):
 	return user_single_mds(num_blocks, connection_limit, num_codes)
 
 
@@ -37,9 +37,9 @@ Returns:
 	speed: float of the speed
 	error: boolean of wheter it is an error.
 """
-def cache_single_msr(num_blocks,connection_limit,num_codes):
+def cache_single_msr(num_blocks,connection_limit,num_codes,multiple=2):
 	which_code = random_int(num_codes)
-	multiple = num_codes / num_blocks
+	var_d = multiple * num_blocks
 
 	conn_speeds = []
 	for j in range(0,connection_limit):
@@ -75,10 +75,11 @@ def cache_single_msr(num_blocks,connection_limit,num_codes):
 		reconstruction_error = False
 		reconstruction_speed = recon_speeds[nlargest(num_blocks,recon_speeds.keys(),key=lambda i:recon_speeds[i])[num_blocks-1]]
 
-	if len(special_speeds) >= num_codes:
+	if len(special_speeds) >= var_d:
 		special_error = False
-		special_speed = special_speeds[nlargest(num_codes, special_speeds.keys(), key=lambda i:special_speeds[i])[num_blocks-1]]
+		special_speed = special_speeds[nlargest(var_d, special_speeds.keys(), key=lambda i:special_speeds[i])[var_d-1]]
 		special_speed = special_speed * ( (multiple-1)*num_blocks + 1)
+
 
 	if chosen_error and reconstruction_error and special_error:
 		return None,True

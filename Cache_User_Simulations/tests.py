@@ -57,19 +57,9 @@ def twin_test(num_blocks=4,num_codes=8,num_simulations=100000, printTrigger=True
 """
 Runs tests for the MSR Code
 """
-def msr_test(num_blocks, num_codes, num_conn, num_simulations=100000, printTrigger=True):
-	print # Empty Line
-	print "--------------- MSR RESULTS ---------------"
-	print # Empty Line
-	print "\t-------- USER RESULTS--------"
-	simulator = create_simulation("User",num_blocks,"MSR",printTrigger)
-	results = simulator(num_simulations,num_codes,num_conn)
-	print_results(num_simulations,results)
-	print # Empty Line
-	print "\t-------- CACHE RESULTS--------"
-	simulator = create_simulation("Cache",num_blocks,"MSR",printTrigger)
-	results = simulator(num_simulations,num_codes,num_conn)
-	print_results(num_simulations, results)	
+def msr_test(num_blocks, num_codes, num_conn, multiple,num_simulations=100000, printTrigger=True):
+	generic_test("MSR",num_blocks,num_codes,num_simulations,printTrigger)
+
 
 def test_variable_connection_generic(typ, num_simulations=10000, num_blocks=4, num_codes=8,printTrigger=True):
 	print # Empty Line
